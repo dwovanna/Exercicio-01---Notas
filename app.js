@@ -24,18 +24,44 @@ entradaDados.question('Nome do Aluno: \n', function(aluno){
 //Função CallBack para entrar sexo do aluno
 entradaDados.question('Sexo do Aluno: \n', function(generoAluno){
     //Recebe digitado pelo teclado
-    let sexoAluno = generoAluno;
+    let sexoAluno = generoAluno.toUpperCase();
 
+    let entradaAluno;
+
+    switch(sexoAluno) {
+        case "MASCULINO":
+        entradaAluno = "O Aluno";
+        break;
+
+        case "FEMENINO":
+        entradaAluno = "A Aluna";
+        break;
+    }
+    
 
 //Função de CallBack para entrar nome do professor
 entradaDados.question('Nome do Professor: \n', function(nome){
     //Recebe o que é digitado no teclado
     let nomeProfessor = nome;
 
+    
+
 //Função de CallBack para entrar sexo do professor
 entradaDados.question('Sexo do Professor: \n', function(generoProfessor){
     //Recebe o que é digitado pelo teclado
-    let sexoProfessor = generoProfessor;
+    let sexoProfessor = generoProfessor.toUpperCase();
+
+    let entradaProfessor;
+
+    switch(sexoProfessor) {
+        case "MASCULINO":
+        entradaProfessor = "PROFESSOR";
+        break;
+
+        case "FEMENINO":
+        entradaProfessor = "PROFESSOR:";
+        break;
+    }
 
 //Função de CallBack para entrar nome do curso
 entradaDados.question('Nome do Curso: \n', function(curso){
@@ -84,24 +110,38 @@ if(valor1 =='' || valor2 == '' || valor3 == '' || valor4 == '')
 {  
     console.log('ERRO: Número máximo é 100')
 }
+
+      
      
                 else{
                 //Calculo das notas
                 media = (parseFloat(valor1) + parseFloat(valor2) + parseFloat(valor3) + parseFloat(valor4))/4;
 
+                 //Resultado
+                console.log('Média do Aluno: ' + media.toFixed(1));
+
                  // validação se o aluno foi reprovado ou não
 
-                if(media < 70)
+                if(media >= 70)
                 {
-                    console.log('Status do Aluno: REPROVADO!');
+                    console.log('Status do Aluno: APROVADO!');
                 }else 
                 {
-                    console.log('Statatus do Aluno: APROVADO!');
-                }
-                //Resultado
+                    console.log('Statatus do Aluno: REPROVADO!');
 
-                console.log('Média do Aluno: ' + media.toFixed(1));
+                // Se a nota for entre 50 e 69 precisa da nota do exame
+                } if (media >= 50 && media <= 69){
+                    console.log('Será necessário a nota do exame');
+                entradaDados.question('Digite a nota do exame: \n', function(exame){
+                    let notaExame = exame;
+                });
+
+                }                                 
+               
                 }
+
+                // Tela Final
+                console.log(entradaAluno, aluno, "foi Aprovado na disciplina", nomeDisciplina, "\n",  "CURSO:" + curso, "\n", entradaProfessor, nome, "\n", "NOTAS DO ALUNO:" + valor1, valor2, valor3, valor4, "\n", "MÉDIA FINAL:" + media);
 
 
                   });
