@@ -74,77 +74,89 @@ entradaDados.question('Nome da disciplina: \n', function(disciplina){
     let nomeDisciplina =  disciplina
 
 
-//Função de CallBack para entrar a nota1
-entradaDados.question('Digite a nota1: \n', function(nota1){
-    let valor1 = nota1;
-    
-    //Função de CallBack para entrar nota2
-    entradaDados.question('Digite a nota2: \n', function(nota2){
-        let valor2 = nota2;
+    //Função de CallBack para entrar a nota1
+    entradaDados.question('Digite a nota1: \n', function(nota1){
+        let valor1 = nota1;
+        
+        //Função de CallBack para entrar nota2
+        entradaDados.question('Digite a nota2: \n', function(nota2){
+            let valor2 = nota2;
 
-        //Função de CallBack para entrar nota3
-        entradaDados.question('Digite a nota3: \n', function(nota3){
-            let valor3 = nota3;
+            //Função de CallBack para entrar nota3
+            entradaDados.question('Digite a nota3: \n', function(nota3){
+                let valor3 = nota3;
 
-             //Função de CallBack para entrar nota4
-            entradaDados.question('Digite a nota4: \n', function(nota4){
-                let valor4 = nota4;
-                let media;
+                //Função de CallBack para entrar nota4
+                entradaDados.question('Digite a nota4: \n', function(nota4){
+                    let valor4 = nota4;
+                    let media;
+                    
 
-// Erro para entrada vazia
-if(valor1 =='' || valor2 == '' || valor3 == '' || valor4 == '')
-{
-    console.log('ERRO: Voce deixou de entrar com algum valor.')
+                    // Erro para entrada vazia
+                    if(valor1 =='' || valor2 == '' || valor3 == '' || valor4 == '')
+                    {
+                        console.log('ERRO: Voce deixou de entrar com algum valor.')
 
-// Erro para entrada de texto
-}else if(isNaN(valor1) || isNaN(valor2) || isNaN(valor3) || isNaN(valor4))
-{
-    console.log('ERRO: Voce não digitou um número válido.')
+                    // Erro para entrada de texto
+                    }else if(isNaN(valor1) || isNaN(valor2) || isNaN(valor3) || isNaN(valor4))
+                    {
+                        console.log('ERRO: Voce não digitou um número válido.')
 
-// Erro para entrada de dados entre 0 e 100
-}else if( valor1 < 0 || valor2 < 0 || valor3 < 0 || valor4 < 0)
-{
-    console.log('ERRO: Número minímo é 0')
+                    // Erro para entrada de dados entre 0 e 100
+                    }else if( valor1 < 0 || valor2 < 0 || valor3 < 0 || valor4 < 0)
+                    {
+                        console.log('ERRO: Número minímo é 0')
 
-} else if (valor1 > 100 || valor2 > 100 || valor3 > 100 || valor4 > 100)
-{  
-    console.log('ERRO: Número máximo é 100')
-}
+                    } else if (valor1 > 100 || valor2 > 100 || valor3 > 100 || valor4 > 100)
+                    {  
+                        console.log('ERRO: Número máximo é 100')
+                    }
 
-      
-     
                 else{
-                //Calculo das notas
-                media = (parseFloat(valor1) + parseFloat(valor2) + parseFloat(valor3) + parseFloat(valor4))/4;
+                    //Calculo das notas
+                    media = (parseFloat(valor1) + parseFloat(valor2) + parseFloat(valor3) + parseFloat(valor4))/4;
 
-                 //Resultado
-                console.log('Média do Aluno: ' + media.toFixed(1));
+                    let notaExame;
+                    
 
-                 // validação se o aluno foi reprovado ou não
+                    //Resultado
+                    console.log('Média do Aluno: ' + media.toFixed(1));
 
-                if(media >= 70)
-                {
-                    console.log('Status do Aluno: APROVADO!');
-                }else 
-                {
-                    console.log('Statatus do Aluno: REPROVADO!');
+                    // validação se o aluno foi reprovado ou não
 
-                // Se a nota for entre 50 e 69 precisa da nota do exame
-                } if (media >= 50 && media <= 69){
-                    console.log('Será necessário a nota do exame');
-                entradaDados.question('Digite a nota do exame: \n', function(exame){
-                    let notaExame = exame;
-                });
+                    if(media >= 70)
+                    {
+                        console.log(entradaAluno, aluno, "foi APROVADO na disciplina", nomeDisciplina, "\n",  "CURSO:" + curso, "\n", entradaProfessor, nome, "\n", "NOTAS DO ALUNO:" + valor1, valor2, valor3, valor4, "\n", "MÉDIA:" + media);
+                    }else if(media < 50){
+                        //reprovado
+                        console.log('Voce foi REPROVADO!');
 
-                }                                 
-               
+                                  // Se a nota for entre 50 e 69 precisa da nota do exame
+                    }else if (media >= 50 && media <= 69){
+                        console.log('Será necessário a nota do exame! \n');
+                              
+                
+                    // Tela de exame
+              
+                        entradaDados.question('Digite a nota do exame:\n', function (exame){
+                            let notaExame = exame;
+                            let exameFinal;
+
+                            exameFinal = (parseFloat(valor1) + parseFloat(valor2) + parseFloat(valor3) + parseFloat(valor4) + parseFloat(notaExame))/4;
+                    
+                            console.log(entradaAluno, aluno, "foi APROVADO na disciplina", nomeDisciplina, "\n",  "CURSO:" + curso, "\n", entradaProfessor, nome, "\n", "NOTAS DO ALUNO:" + valor1, valor2, valor3, valor4, "\n", "MÉDIA:" + media, "\n", "MÉDIA FINAL: " + exameFinal);
+                            
+                               if(exameFinal >= 70){
+                                console.log('APROVADO!')
+                               } else if (exameFinal < 70){
+                                  console.log('REPROVADO!')
+                               }
+
+                        }); 
                 }
 
-                // Tela Final
-                console.log(entradaAluno, aluno, "foi Aprovado na disciplina", nomeDisciplina, "\n",  "CURSO:" + curso, "\n", entradaProfessor, nome, "\n", "NOTAS DO ALUNO:" + valor1, valor2, valor3, valor4, "\n", "MÉDIA FINAL:" + media);
-
-
-                  });
+                  };
+                });
                 });
               });
             });
